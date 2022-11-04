@@ -1,0 +1,35 @@
+.homePage{
+    padding: var(--xl) 0;
+
+    display: block;
+    
+    /*height: calc(100vh - ((2 * (var(--md) + var(--sm))) + 1ch));*/
+}
+
+.searchBanner{
+    margin-bottom: var(--xl);
+}
+
+.searchBanner .container{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: var(--xxxl);
+}
+
+.searchBanner .container > img{
+    max-width: 350px;
+    width: 40%;
+}
+
+.brands .container{
+    display: grid;
+    grid-template-columns: repeat(5, minmax(64px, 128px));
+    grid-gap: var(--xl);
+    align-items: center;
+    justify-content: space-between;
+}
+
+.brands .container img{
+    /*max-width: 18%;*/
+}

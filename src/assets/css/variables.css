@@ -1,0 +1,51 @@
+:root{
+    --main-font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+
+    --container-padding: 6rem;
+    --form-width: 70%;
+
+    /* Colors */
+    --white-main-color: 255, 255, 255;
+    --black-main-color: 0, 0, 0;
+    --orange-main-color: 255, 115, 29;
+    --yellow-main-color: 219, 251, 0;
+    --blue-main-color: 95, 157, 247;
+    --blue-disabled-color: 95, 140, 150;
+
+    /*  */
+    --inner-padding: .75rem 2rem;
+
+    /* Input */
+
+    /* Font */
+    --main-font-weight: 600;
+    --main-border-width: 1px;
+    --main-border-radius: 10px;
+
+    /* Adaptive / Gaps / Flex / Grid */
+    --xs: .25rem;
+    --sm: .5rem;
+    --md: 1rem;
+    --xl: 2rem;
+    --xxl: 4rem;
+    --xxxl: 8rem;
+    --max: 9999px;
+
+    /*--header-height: calc((2 * (var(--md) + var(--sm))) + 1ch);*/
+
+    /* Shadow */
+    --shadow-offset: .25rem .25rem;
+    --shadow-radius: 20px;
+    --shadow-main-color: rgba(0, 0, 0, .2);
+    --shadow-secondary-color: rgba(0, 0, 0, .15);
+    --main-shadow: var(--shadow-offset) var(--shadow-radius) var(--shadow-main-color);
+    --secondary-shadow: var(--shadow-offset) var(--shadow-radius) var(--shadow-secondary-color);
+
+    /* Animation */
+    --short-transition: all .25s ease-in-out;
+    --middle-transition: all .5s ease-in-out;
+    --long-transition: all 1s ease-in-out;
+
+}

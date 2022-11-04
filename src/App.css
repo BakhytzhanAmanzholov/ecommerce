@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+}
+
+:is(h1, h2, h3, h4, h5, h6, p){
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 0 var(--container-padding);
+    margin: 0 auto;
+}
+
+img{
+    width: 100%;
+}
+
+a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /*padding: var(--sm);*/
+
+    color: rgba(var(--black-main-color), 1);
+
+    text-decoration: none;
+}
+
+input, textarea, button{
+    font-family: var(--main-font-family);
+}

@@ -1,0 +1,44 @@
+.header{
+    padding: var(--md) 0;
+}
+
+.header .container{
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--md);
+}
+
+.headerAccount ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--md);
+}
+
+.headerAccount a{
+    border-radius: var(--max);
+
+    padding: var(--sm) var(--xl);
+}
+
+.headerAccount a.active{
+    color: rgba(var(--orange-main-color), 1);
+}
+
+
+.headerAccount .register{
+    color: rgba(var(--white-main-color), 1);
+    background-color: rgba(var(--black-main-color), 1);
+}
+
+.headerAccount .login{
+    color: rgba(var(--black-main-color), 1);
+    background-color: rgba(var(--white-main-color), 1);
+    border: var(--main-border-width) solid rgba(var(--black-main-color), 1);
+}
