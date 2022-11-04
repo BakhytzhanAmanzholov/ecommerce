@@ -18,7 +18,7 @@ public class ECommerceApplication {
     @Bean
     public ObjectMapper objectMapper() {
         return new ObjectMapper();
-    }io
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(ECommerceApplication.class, args);

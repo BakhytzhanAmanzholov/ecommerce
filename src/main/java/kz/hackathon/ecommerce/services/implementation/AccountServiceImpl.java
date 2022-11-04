@@ -71,4 +71,16 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.findById(aLong).orElseThrow(
                 () -> new UsernameNotFoundException("User <" + aLong + "> not found"));
     }
+
+    @Override
+    public Boolean changeRole(String email, String roleName) {
+        Account account = findByEmail(email);
+        for (Account.Role roleIterator : Account.Role.values()) {
+            if (roleName.equals(roleIterator.name())) {
+                account.setRole(roleIterator);
+                return true;
+            }
+        }
+        return false;
+    }
 }

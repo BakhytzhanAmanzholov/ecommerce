@@ -17,7 +17,7 @@ public class Account {
     }
 
     public enum Role {
-        USER, SUPERVISOR, CASHIER, ADMIN
+        USER, SUPERVISOR, SELLER, ADMIN
     }
 
     @Id
