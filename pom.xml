@@ -17,6 +17,7 @@
         <java.version>1.8</java.version>
     </properties>
 <!--    TODO: всегда менять джаву на 1.8-->
+<!--    обычная версия - 17-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

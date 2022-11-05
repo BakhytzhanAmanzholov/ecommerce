@@ -19,6 +19,16 @@ public class Product {
     private String title;
     private String description;
     private String artifact;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<PriceInfo> prices;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Ingredient> ingredients;
+
+    @ManyToOne
+    private SubCategory subCategory;
+
+    @ManyToOne
+    private Category category;
 }

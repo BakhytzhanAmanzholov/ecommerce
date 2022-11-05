@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -40,6 +41,9 @@ public class Account {
     @Enumerated(value = EnumType.STRING)
     private State state;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Product> preferencesProducts = new HashSet<>();
+
+    @OneToMany
+    private List<InfoProduct> purchasedProducts;
 }

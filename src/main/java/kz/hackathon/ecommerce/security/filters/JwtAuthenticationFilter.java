@@ -1,6 +1,8 @@
 package kz.hackathon.ecommerce.security.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kz.hackathon.ecommerce.dto.mappers.AccountMapper;
+import kz.hackathon.ecommerce.dto.response.AccountDto;
 import kz.hackathon.ecommerce.security.authentication.RefreshTokenAuthentication;
 import kz.hackathon.ecommerce.security.config.JwtSecurityConfig;
 import kz.hackathon.ecommerce.security.details.UserDetailsImpl;
@@ -75,9 +77,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private void writeTokens(HttpServletRequest request, HttpServletResponse response, UserDetailsImpl userDetails) throws IOException {
         response.setContentType("application/json");
 
-        TokenWithRoleName r = new TokenWithRoleName();
-        r.setEmail(userDetails.getUser().getEmail());
-        r.setRole(userDetails.getUser().getRole().toString());
+        TokenWithAccount r = new TokenWithAccount();
+        r.setAccount(AccountMapper.toResponseDto(userDetails.getUser()));
 
         Map<String, String> tokenJson = jwtUtil.generateTokens(
                 userDetails.getUsername(),
@@ -95,8 +96,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 }
 
 @Data
-class TokenWithRoleName {
+class TokenWithAccount {
     private Map<String, String> token;
-    private String email;
-    private String role;
+    private AccountDto account;
 }

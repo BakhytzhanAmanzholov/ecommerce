@@ -1,8 +1,10 @@
 package kz.hackathon.ecommerce.services.implementation;
 
 import kz.hackathon.ecommerce.models.Account;
+import kz.hackathon.ecommerce.models.PriceInfo;
 import kz.hackathon.ecommerce.repositories.AccountRepository;
 import kz.hackathon.ecommerce.services.AccountService;
+import kz.hackathon.ecommerce.services.PriceInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -23,6 +25,8 @@ public class AccountServiceImpl implements AccountService {
     private final AccountRepository accountRepository;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final PriceInfoService priceInfoService;
 
     @Override
     public Account findByEmail(String email) {
@@ -82,5 +86,12 @@ public class AccountServiceImpl implements AccountService {
             }
         }
         return false;
+    }
+
+    @Override
+    public void addPriceInfoToAccount(Account account, PriceInfo priceInfo) {
+        Account realAccount = findByEmail(account.getEmail());
+        PriceInfo real = priceInfoService.findById(priceInfo.getId());
+        real.setAccount(realAccount);
     }
 }

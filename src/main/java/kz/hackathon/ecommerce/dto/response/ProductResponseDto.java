@@ -12,5 +12,9 @@ public class ProductResponseDto {
     private String title;
     private String description;
     private String artifact;
+    private String subCategory;
+    private String category;
+
     private List<PriceInfoDto> prices;
+    private List<IngredientDto> ingredients;
 }

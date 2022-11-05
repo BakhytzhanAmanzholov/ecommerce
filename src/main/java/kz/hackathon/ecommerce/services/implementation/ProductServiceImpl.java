@@ -1,16 +1,17 @@
 package kz.hackathon.ecommerce.services.implementation;
 
+import kz.hackathon.ecommerce.dto.response.AnalysisDto;
+import kz.hackathon.ecommerce.dto.response.CategoryAnalysisDto;
 import kz.hackathon.ecommerce.exceptions.NotFoundException;
-import kz.hackathon.ecommerce.models.Account;
-import kz.hackathon.ecommerce.models.Product;
+import kz.hackathon.ecommerce.models.*;
 import kz.hackathon.ecommerce.repositories.ProductRepository;
-import kz.hackathon.ecommerce.services.AccountService;
-import kz.hackathon.ecommerce.services.ProductService;
+import kz.hackathon.ecommerce.services.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -25,9 +26,18 @@ public class ProductServiceImpl implements ProductService {
 
     private final AccountService accountService;
 
+    private final IngredientService ingredientService;
+
+    private final SubCategoryService subCategoryService;
+
+    private final CategoryService categoryService;
+
+    private final PriceInfoService priceInfoService;
+
+    private final InfoProductService infoProductService;
+
     @Override
     public Product save(Product entity) {
-        entity.setPrices(new HashSet<>());
         return productRepository.save(entity);
     }
 
@@ -64,11 +74,112 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void addProductsToAccount(Set<Product> products) {
-        Account account = accountService.findByEmail(accountService.isLogged());
-
         for (Product product : products) {
             Product realProduct = findById(product.getId());
+            Account account = accountService.findByEmail(accountService.isLogged());
             account.getPreferencesProducts().add(realProduct);
         }
+    }
+
+    @Override
+    public void addIngredientToProduct(Product product, Set<Ingredient> ingredients) {
+        for (Ingredient ingredient : ingredients) {
+            Ingredient realIngredient = ingredientService.findById(ingredient.getId());
+            Product realProduct = findById(product.getId());
+            realProduct.getIngredients().add(realIngredient);
+        }
+    }
+
+    @Override
+    public void updateSubCategory(SubCategory subCategory, Product product) {
+        Product realProduct = findById(product.getId());
+        SubCategory realSubCategory = subCategoryService.findById(subCategory.getId());
+
+        realProduct.setSubCategory(realSubCategory);
+    }
+
+    @Override
+    public void updateCategory(Category category, Product product) {
+        Product realProduct = findById(product.getId());
+        Category realCategory = categoryService.findById(category.getId());
+
+        realProduct.setCategory(realCategory);
+    }
+
+    @Override
+    public void addPriceInfoToProduct(Product product, PriceInfo priceInfo) {
+        Product realProduct = findById(product.getId());
+        PriceInfo real = priceInfoService.findById(priceInfo.getId());
+        realProduct.getPrices().add(real);
+        realProduct = findById(product.getId());
+        real = priceInfoService.findById(priceInfo.getId());
+        real.setProduct(realProduct);
+    }
+
+    @Override
+    public void purchaseProduct(Account account, Account seller, Product product, PriceInfo priceInfo) {
+        Account realAccount = accountService.findByEmail(account.getEmail());
+        Account realSeller = accountService.findByEmail(seller.getEmail());
+        Product realProduct = findById(product.getId());
+        PriceInfo realInfo = priceInfoService.findById(priceInfo.getId());
+
+        realAccount.getPurchasedProducts().add(
+                infoProductService.save(
+                        InfoProduct.builder()
+                                .price(realInfo.getPrice())
+                                .account(realAccount)
+                                .product(realProduct)
+                                .seller(realSeller.getName())
+                                .build()
+                )
+        );
+    }
+
+    @Override
+    public AnalysisDto analysis() {
+        Account account = accountService.findByEmail(accountService.isLogged());
+        AnalysisDto analysisDto = AnalysisDto.builder()
+                .categories(
+                        List.of(
+                                CategoryAnalysisDto.builder()
+                                        .totalAmount(0)
+                                        .title("Декоративная косметика")
+                                        .build(),
+                                CategoryAnalysisDto.builder()
+                                        .totalAmount(0)
+                                        .title("Уходовая косметика")
+                                        .build(),
+                                CategoryAnalysisDto.builder()
+                                        .totalAmount(0)
+                                        .title("Парфюмерия")
+                                        .build()
+                        )
+                )
+                .totalAmount(0)
+                .build();
+        for (InfoProduct infoProduct : account.getPurchasedProducts()) {
+            analysisDto.setTotalAmount(analysisDto.getTotalAmount() + infoProduct.getPrice());
+            switch (infoProduct.getProduct().getCategory().getTitle()) {
+                case "Декоративная косметика":
+                    analysisDto.getCategories().get(0).setTotalAmount(
+                            analysisDto.getCategories().get(0).getTotalAmount() + infoProduct.getPrice()
+                    );
+
+                    break;
+                case "Уходовая косметика":
+                    analysisDto.getCategories().get(1).setTotalAmount(
+                            analysisDto.getCategories().get(1).getTotalAmount() + infoProduct.getPrice()
+                    );
+
+                    break;
+                case "Парфюмерия":
+                    analysisDto.getCategories().get(2).setTotalAmount(
+                            analysisDto.getCategories().get(2).getTotalAmount() + infoProduct.getPrice()
+                    );
+
+                    break;
+            }
+        }
+        return analysisDto;
     }
 }

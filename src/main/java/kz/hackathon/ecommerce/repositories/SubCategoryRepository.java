@@ -1,0 +1,7 @@
+package kz.hackathon.ecommerce.repositories;
+
+import kz.hackathon.ecommerce.models.SubCategory;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface SubCategoryRepository extends JpaRepository<SubCategory, Long> {
+}

@@ -2,7 +2,10 @@ package kz.hackathon.ecommerce.models;
 
 import lombok.*;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 @NoArgsConstructor
@@ -11,14 +14,10 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Builder
-public class PriceInfo {
+public class Ingredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Product product;
-    @ManyToOne
-    private Account account;
-    private String delivery;
-    private Integer price;
+    private String name;
+    private Boolean healthy;
 }

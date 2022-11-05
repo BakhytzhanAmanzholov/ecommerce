@@ -3,6 +3,7 @@ package kz.hackathon.ecommerce.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -11,14 +12,11 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Builder
-public class PriceInfo {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Product product;
-    @ManyToOne
-    private Account account;
-    private String delivery;
-    private Integer price;
+    private String title;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<SubCategory> subCategories;
 }

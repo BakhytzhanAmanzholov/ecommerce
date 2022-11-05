@@ -11,14 +11,21 @@ import javax.persistence.*;
 @Setter
 @ToString
 @Builder
-public class PriceInfo {
+public class InfoProduct {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @ManyToOne
-    private Product product;
+
     @ManyToOne
     private Account account;
-    private String delivery;
+
+    @ManyToOne
+    private Product product;
+
     private Integer price;
+
+    private String seller;
+
+
 }
