@@ -41,11 +41,11 @@ public class JwtSecurityConfig {
         httpSecurity.cors();
         httpSecurity.csrf().disable();
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.authorizeRequests().antMatchers("/auth/token/**", "/", "/zebra-open-api",
-                "/api/supervisor/registration/").permitAll();
-        httpSecurity.authorizeRequests().antMatchers("/api/products/**").authenticated();
-        httpSecurity.authorizeRequests().antMatchers("/admin/**").hasAuthority("ADMIN");
-//        httpSecurity.authorizeRequests().antMatchers("/supervisor/**", "products/**").hasAuthority("SUPERVISOR");
+        httpSecurity.authorizeRequests().antMatchers("/api//auth/token/**", "/", "/open-api",
+                "/api/supervisor/registration/", "/api/products/**").permitAll();
+//        httpSecurity.authorizeRequests().antMatchers("/api/products/**").authenticated();
+        httpSecurity.authorizeRequests().antMatchers("/api/admin/**").hasAuthority("ADMIN");
+        httpSecurity.authorizeRequests().antMatchers("/api/supervisor/**").hasAuthority("SUPERVISOR");
 //        httpSecurity.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
 
         httpSecurity.addFilter(jwtAuthenticationFilter);

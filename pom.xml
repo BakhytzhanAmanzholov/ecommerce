@@ -14,8 +14,9 @@
     <name>E-Commerce</name>
     <description>E-Commerce</description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
     </properties>
+<!--    TODO: всегда менять джаву на 1.8-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

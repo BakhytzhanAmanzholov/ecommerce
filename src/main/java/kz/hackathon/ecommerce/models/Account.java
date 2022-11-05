@@ -3,6 +3,8 @@ package kz.hackathon.ecommerce.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -37,4 +39,7 @@ public class Account {
     private Role role;
     @Enumerated(value = EnumType.STRING)
     private State state;
+
+    @ManyToMany
+    private Set<Product> preferencesProducts = new HashSet<>();
 }
