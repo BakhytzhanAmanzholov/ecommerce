@@ -138,23 +138,22 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public AnalysisDto analysis() {
         Account account = accountService.findByEmail(accountService.isLogged());
+        List<CategoryAnalysisDto> dtoList = new ArrayList<>();
+        dtoList.add(CategoryAnalysisDto.builder()
+                .totalAmount(0)
+                .title("Декоративная косметика")
+                .build());
+        dtoList.add(CategoryAnalysisDto.builder()
+                .totalAmount(0)
+                .title("Уходовая косметика")
+                .build());
+        dtoList.add(CategoryAnalysisDto.builder()
+                .totalAmount(0)
+                .title("Парфюмерия")
+                .build());
+
         AnalysisDto analysisDto = AnalysisDto.builder()
-                .categories(
-                        List.of(
-                                CategoryAnalysisDto.builder()
-                                        .totalAmount(0)
-                                        .title("Декоративная косметика")
-                                        .build(),
-                                CategoryAnalysisDto.builder()
-                                        .totalAmount(0)
-                                        .title("Уходовая косметика")
-                                        .build(),
-                                CategoryAnalysisDto.builder()
-                                        .totalAmount(0)
-                                        .title("Парфюмерия")
-                                        .build()
-                        )
-                )
+                .categories(dtoList)
                 .totalAmount(0)
                 .build();
         for (InfoProduct infoProduct : account.getPurchasedProducts()) {

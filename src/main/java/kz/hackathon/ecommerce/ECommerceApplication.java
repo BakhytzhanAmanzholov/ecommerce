@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -174,24 +175,30 @@ public class ECommerceApplication {
                             .build()
             );
 
+            Set<Product> productSet = new HashSet<>();
+            productSet.add(normalSkin);
             Answer answer1_1 = answerService.save(
               Answer.builder()
                       .answer("Нормальная")
-                      .products(Set.of(normalSkin))
+                      .products(productSet)
                       .build()
             );
 
+            productSet.clear();
+            productSet.add(drySkin);
             Answer answer1_2 = answerService.save(
                     Answer.builder()
                             .answer("Сухая")
-                            .products(Set.of(drySkin))
+                            .products(productSet)
                             .build()
             );
 
+            productSet.clear();
+            productSet.add(combiSkin);
             Answer answer1_3 = answerService.save(
                     Answer.builder()
                             .answer("Комбинированная")
-                            .products(Set.of(combiSkin))
+                            .products(productSet)
                             .build()
             );
 
@@ -201,85 +208,109 @@ public class ECommerceApplication {
 //                            .products(Set.of(normalSkin))
 //                            .build()
 //            );
-
+            productSet.clear();
+            productSet.add(sensitiveSkin);
             Answer answer1_5 = answerService.save(
                     Answer.builder()
                             .answer("Чувствительная")
-                            .products(Set.of(sensitiveSkin))
+                            .products(productSet)
                             .build()
             );
+
+            List<Answer> answerList = new ArrayList<>();
+            answerList.add(answer1_1);
+            answerList.add(answer1_2);
+            answerList.add(answer1_3);
+            answerList.add(answer1_5);
 
             Survey survey1 = surveyService.save(
               Survey.builder()
                       .question("Какой у вас тип кожи:")
-                      .answers(List.of(answer1_1, answer1_2, answer1_3, answer1_5))
+                      .answers(answerList)
                       .build()
             );
 
 //            sled
-
+            productSet.clear();
+            productSet.add(youngSkin);
             Answer answer2_1 = answerService.save(
                     Answer.builder()
                             .answer("Молодая")
-                            .products(Set.of(youngSkin))
+                            .products(productSet)
                             .build()
             );
 
+            productSet.clear();
+            productSet.add(oldSkin);
             Answer answer2_2 = answerService.save(
                     Answer.builder()
                             .answer("Возрастная")
-                            .products(Set.of(oldSkin))
+                            .products(productSet)
                             .build()
             );
 
+            answerList.clear();
+            answerList.add(answer2_1);
+            answerList.add(answer2_2);
             Survey survey2 = surveyService.save(
                     Survey.builder()
                             .question("У Вас кожа:")
-                            .answers(List.of(answer2_1, answer2_2))
+                            .answers(answerList)
                             .build()
             );
 
 //            sled
 
+            productSet.clear();
+            productSet.add(extended);
             Answer answer3_1 = answerService.save(
                     Answer.builder()
                             .answer("Расширенные")
-                            .products(Set.of(extended))
+                            .products(productSet)
                             .build()
             );
-
+            productSet.clear();
+            productSet.add(normal);
             Answer answer3_2 = answerService.save(
                     Answer.builder()
                             .answer("Нормальные")
-                            .products(Set.of(normal))
+                            .products(productSet)
                             .build()
             );
-
+            answerList.clear();
+            answerList.add(answer3_1);
+            answerList.add(answer3_2);
             Survey survey3 = surveyService.save(
                     Survey.builder()
                             .question("Какие у вас поры:")
-                            .answers(List.of(answer3_1, answer3_2))
+                            .answers(answerList)
                             .build()
             );
 
+            productSet.clear();
+            productSet.add(with);
             Answer answer4_1 = answerService.save(
                     Answer.builder()
                             .answer("Да")
-                            .products(Set.of(with))
+                            .products(productSet)
                             .build()
             );
 
+            productSet.clear();
+            productSet.add(without);
             Answer answer4_2 = answerService.save(
                     Answer.builder()
                             .answer("Нет")
-                            .products(Set.of(without))
+                            .products(productSet)
                             .build()
             );
-
+            answerList.clear();
+            answerList.add(answer4_1);
+            answerList.add(answer4_2);
             Survey survey4 = surveyService.save(
                     Survey.builder()
                             .question("Есть ли у вас акне?")
-                            .answers(List.of(answer4_1, answer4_2))
+                            .answers(answerList)
                             .build()
             );
 
@@ -289,45 +320,67 @@ public class ECommerceApplication {
                             .description("Превосходный тональный крем для активных женщин, который позволяет сделать быстрый, аккуратный и стойкий макияж")
                             .artifact("887167449091")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
+
+            Set<Product> productsForCategories = new HashSet<>();
+            productsForCategories.add(tonal);
             SubCategory subCategory1 = subCategoryService.save(
                     SubCategory.builder()
                             .title("Тональные средства")
-                            .products(Set.of(tonal))
+                            .products(productsForCategories)
                             .build()
             );
 
+            Set<SubCategory> subCategorySet = new HashSet<>();
+            subCategorySet.add(subCategory1);
             Category category1 = categoryService.save(
                     Category.builder()
                             .title("Декоративная косметика")
-                            .subCategories(Set.of(subCategory1))
+                            .subCategories(subCategorySet)
                             .build()
             );
-
+            productsForCategories.clear();
+            productsForCategories.add(normalSkin);
+            productsForCategories.add(drySkin);
+            productsForCategories.add(combiSkin);
+            productsForCategories.add(sensitiveSkin);
+            productsForCategories.add(oldSkin);
+            productsForCategories.add(extended);
+            productsForCategories.add(without);
             SubCategory subCategory2 = subCategoryService.save(
                     SubCategory.builder()
                             .title("Кремы")
-                            .products(Set.of(normalSkin, drySkin, combiSkin, sensitiveSkin, oldSkin, extended, without))
+                            .products(productsForCategories)
                             .build()
             );
+            productsForCategories.clear();
+            productsForCategories.add(youngSkin);
             SubCategory subCategory3 = subCategoryService.save(
                     SubCategory.builder()
                             .title("Тонеры")
-                            .products(Set.of(youngSkin))
+                            .products(productsForCategories)
                             .build()
             );
+            productsForCategories.clear();
+            productsForCategories.add(normal);
+            productsForCategories.add(with);
             SubCategory subCategory4 = subCategoryService.save(
                     SubCategory.builder()
                             .title("Сыворотки")
-                            .products(Set.of(normal, with))
+                            .products(productsForCategories)
                             .build()
             );
+            subCategorySet.clear();
+            subCategorySet.add(subCategory4);
+            subCategorySet.add(subCategory3);
+            subCategorySet.add(subCategory2);
+
             Category category2 = categoryService.save(
                     Category.builder()
                             .title("Уходовая косметика")
-                            .subCategories(Set.of(subCategory4, subCategory2, subCategory3))
+                            .subCategories(subCategorySet)
                             .build()
             );
             Category category3 = categoryService.save(
