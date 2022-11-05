@@ -62,13 +62,19 @@ public class ECommerceApplication {
                             .build()
             );
 
+            Set<Ingredient> ingredientSet = new HashSet<>();
+            ingredientSet.add(ingredient1);
+            ingredientSet.add(ingredient2);
+            ingredientSet.add(ingredient3);
+            ingredientSet.add(ingredient4);
+
             Product normalSkin = productService.save(
                     Product.builder()
                             .title("Clarins Multi Active Revitalizing Night cream")
                             .description("Ночной крем для нормальной и комбинированной кожи")
                             .artifact("285083")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -78,7 +84,7 @@ public class ECommerceApplication {
                             .description("эмульсия для чувствительной и поврежденной кожи")
                             .artifact("470615")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -88,7 +94,7 @@ public class ECommerceApplication {
                             .description("Увлажняющий крем Vanicream ™ восстанавливает и поддерживает нормальный уровень влажности. Он столь же нежен, сколь и эффективен даже для самой нежной кожи.")
                             .artifact("30016")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -98,7 +104,7 @@ public class ECommerceApplication {
                             .description("Восстанавливающий крем с ресвератролом сокращает выраженность мимических морщин и заметно разглаживает кожные заломы, ускоряет процессы регенерации и обновления кожи, повышает эластичность и укрепляет эпидермис.")
                             .artifact("00963")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -110,7 +116,7 @@ public class ECommerceApplication {
                             .description("Отличное средство для увлажнения, тонизирования и восстановления гидролипидного баланса эпидермиса.")
                             .artifact("544014")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -120,7 +126,7 @@ public class ECommerceApplication {
                             .description("Крем для лица Морские водоросли Про-Коллаген")
                             .artifact("727")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -132,7 +138,7 @@ public class ECommerceApplication {
                             .description("Легкий крем с экстрактом прополиса")
                             .artifact("45103")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -142,7 +148,7 @@ public class ECommerceApplication {
                             .description("Улучшающая уход за кожей эссенция с витамином С")
                             .artifact("8809030312")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -154,7 +160,7 @@ public class ECommerceApplication {
                             .description("Универсальный крем для лица с лактобактериями HYGGEE All-In-One Cream активно увлажняет и питает кожу")
                             .artifact("8809030730312")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
 
@@ -164,11 +170,9 @@ public class ECommerceApplication {
                             .description("Сыворотка с 10% витамином С, которая заметно осветляет")
                             .artifact("4394021")
                             .prices(new HashSet<>())
-                            .ingredients(Set.of(ingredient1, ingredient2, ingredient3, ingredient4))
+                            .ingredients(ingredientSet)
                             .build()
             );
-
-
 
             Answer answer1_1 = answerService.save(
               Answer.builder()
