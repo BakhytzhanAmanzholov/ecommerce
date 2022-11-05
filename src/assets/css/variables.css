@@ -6,13 +6,20 @@
     --container-padding: 6rem;
     --form-width: 70%;
 
+    /* Imgs */
+    --login-bg-url: url('/src/assets/img/authPages/loginPage.png');
+    --register-bg-url: url('/src/assets/img/authPages/registerPage.png');
+
+
     /* Colors */
     --white-main-color: 255, 255, 255;
     --black-main-color: 0, 0, 0;
     --orange-main-color: 255, 115, 29;
+    --purple-main-color: 230, 179, 245;
     --yellow-main-color: 219, 251, 0;
     --blue-main-color: 95, 157, 247;
     --blue-disabled-color: 95, 140, 150;
+    --ellipse-bg-color: 217, 217, 217;
 
     /*  */
     --inner-padding: .75rem 2rem;
@@ -32,6 +39,11 @@
     --xxl: 4rem;
     --xxxl: 8rem;
     --max: 9999px;
+
+    --ellipse-sm: 1.5rem;
+    --ellipse-md: 3rem;
+    --ellipse-lg: 5rem;
+    --ellipse-xl: 10rem;
 
     /*--header-height: calc((2 * (var(--md) + var(--sm))) + 1ch);*/
 

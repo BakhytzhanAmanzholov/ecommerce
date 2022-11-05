@@ -1,18 +1,23 @@
 .button{
     outline: none;
-    border: var(--main-border-width) solid rgba(var(--blue-main-color), 1);
+    border: var(--main-border-width) solid rgba(var(--yellow-main-color), 1);
     border-radius: var(--main-border-radius);
 
     padding: var(--inner-padding);
 
-    background-color: rgba(var(--blue-main-color), 1);
-    color: #fff;
+    background-color: rgba(var(--yellow-main-color), 1);
+    font-weight: var(--main-font-weight);
 
     cursor: pointer;
 
     transition: var(--short-transition);
 
     box-shadow: var(--secondary-shadow);
+}
+
+.button[data-color='purple']{
+    border: var(--main-border-width) solid rgba(var(--purple-main-color), 1);
+    background-color: rgba(var(--purple-main-color), 1);
 }
 
 .button:active{

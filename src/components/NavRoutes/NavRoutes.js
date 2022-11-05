@@ -3,6 +3,7 @@ import {RequireAuth} from "../RequireAuth/RequireAuth"
 import {HomePage} from "../../pages/HomePage/HomePage";
 import {SignupPage} from "../../pages/SignupPage/SignupPage";
 import {SigninPage} from "../../pages/SigninPage/SigninPage";
+import {ErrorPage} from "../ErrorPage/ErrorPage";
 
 export const NavRoutes = () => {
     return (
@@ -14,6 +15,7 @@ export const NavRoutes = () => {
             }/>
             <Route path={'/registration'} element={<SignupPage/>}/>
             <Route path={'/login'} element={<SigninPage/>}/>
+            <Route path={'/*'} element={<ErrorPage/>}/>
         </Routes>
     )
 }

@@ -1,0 +1,21 @@
+.ellipse{
+    background-color: rgba(var(--ellipse-bg-color), 1);
+    border-radius: 100%;
+    aspect-ratio: 1;
+}
+
+.ellipse[data-size='sm']{
+    width: var(--ellipse-sm);
+}
+
+.ellipse[data-size='md']{
+    width: var(--ellipse-md);
+}
+
+.ellipse[data-size='lg']{
+    width: var(--ellipse-lg);
+}
+
+.ellipse[data-size='xl']{
+    width: var(--ellipse-xl);
+}
