@@ -96,6 +96,7 @@ export const SignupPage = () => {
                                 <Input
                                     key={input.id}
                                     props={input}
+                                    required={true}
                                 />
                             ))
                         }
