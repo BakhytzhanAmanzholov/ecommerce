@@ -1,6 +1,9 @@
 package kz.hackathon.ecommerce.controllers;
 
+import kz.hackathon.ecommerce.dto.mappers.AccountMapper;
 import kz.hackathon.ecommerce.dto.request.IdsDto;
+import kz.hackathon.ecommerce.dto.response.AccountDto;
+import kz.hackathon.ecommerce.models.Account;
 import kz.hackathon.ecommerce.models.PriceInfo;
 import kz.hackathon.ecommerce.models.Product;
 import kz.hackathon.ecommerce.services.AccountService;
@@ -12,7 +15,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -51,6 +56,26 @@ public class AccountController {
         }
         productService.addProductsToAccount(products);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/subscription")
+    public ResponseEntity<?> subscription(){
+        accountService.subscribe();
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/cosmetologist")
+    public ResponseEntity<?> findAllCosmetologist(){
+        if(accountService.findByEmail(accountService.isLogged()).getSubscription().equals(Account.Subscription.ENABLED)){
+            List<Account> cosmetologists = accountService.findAllCosmetologist();
+            List<AccountDto> accounts = new ArrayList<>();
+            for (Account account: cosmetologists){
+                accounts.add(AccountMapper.toResponseDto(account));
+            }
+
+            return new ResponseEntity<>(accounts, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
 }

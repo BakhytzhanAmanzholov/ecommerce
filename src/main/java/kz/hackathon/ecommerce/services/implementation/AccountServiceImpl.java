@@ -14,6 +14,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 import static kz.hackathon.ecommerce.models.Account.State.CONFIRMED;
 
 @Service
@@ -93,5 +95,16 @@ public class AccountServiceImpl implements AccountService {
         Account realAccount = findByEmail(account.getEmail());
         PriceInfo real = priceInfoService.findById(priceInfo.getId());
         real.setAccount(realAccount);
+    }
+
+    @Override
+    public void subscribe() {
+        Account account = findByEmail(isLogged());
+        account.setSubscription(Account.Subscription.ENABLED);
+    }
+
+    @Override
+    public List<Account> findAllCosmetologist() {
+        return accountRepository.findAllByRole(Account.Role.COSMETOLOGIST);
     }
 }

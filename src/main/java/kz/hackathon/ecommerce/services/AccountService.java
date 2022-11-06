@@ -4,6 +4,8 @@ import kz.hackathon.ecommerce.models.Account;
 import kz.hackathon.ecommerce.models.PriceInfo;
 import kz.hackathon.ecommerce.models.Product;
 
+import java.util.List;
+
 public interface AccountService extends CrudService<Account, Long> {
     Account findByEmail(String email);
 
@@ -13,4 +15,7 @@ public interface AccountService extends CrudService<Account, Long> {
 
     void addPriceInfoToAccount(Account account, PriceInfo priceInfo);
 
+    void subscribe();
+
+    List<Account> findAllCosmetologist();
 }

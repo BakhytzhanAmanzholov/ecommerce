@@ -19,6 +19,7 @@ public class AccountMapper {
                 .banned(true)
                 .confirmed(false)
                 .role(Account.Role.USER)
+                .subscription(Account.Subscription.DISABLED)
                 .preferencesProducts(new HashSet<>())
                 .build();
     }

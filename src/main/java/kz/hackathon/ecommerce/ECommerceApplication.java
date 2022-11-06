@@ -438,6 +438,7 @@ public class ECommerceApplication {
                     Account.builder()
                             .preferencesProducts(new HashSet<>())
                             .role(Account.Role.USER)
+                            .subscription(Account.Subscription.ENABLED)
                             .email("user@gmail.com")
                             .name("Bakhytzhan")
                             .password("abc123")
@@ -484,6 +485,28 @@ public class ECommerceApplication {
             );
             accountService.addPriceInfoToAccount(accountSeller1, priceInfo4);
             productService.addPriceInfoToProduct(sensitiveSkin, priceInfo4);
+
+            Account cosmetologist1 = accountService.save(
+                    Account.builder()
+                            .subscription(Account.Subscription.COSMETOLOGIST)
+                            .name("Aidana")
+                            .role(Account.Role.COSMETOLOGIST)
+                            .email("aidana.cosmetologist@gmail.com")
+                            .surname("Malieva")
+                            .password("abc123")
+                            .build()
+            );
+
+            Account cosmetologist2 = accountService.save(
+                    Account.builder()
+                            .subscription(Account.Subscription.COSMETOLOGIST)
+                            .name("Madina")
+                            .role(Account.Role.COSMETOLOGIST)
+                            .email("madina.cosmetologist@gmail.com")
+                            .surname("Lobaueva")
+                            .password("abc123")
+                            .build()
+            );
 
 
         };

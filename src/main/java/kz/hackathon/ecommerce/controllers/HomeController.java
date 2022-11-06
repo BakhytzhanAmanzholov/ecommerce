@@ -102,4 +102,6 @@ public class HomeController {
     public ResponseEntity<?> profile(){
         return ResponseEntity.ok(AccountMapper.toResponseDto(accountService.findByEmail(accountService.isLogged())));
     }
+
+
 }

@@ -20,7 +20,11 @@ public class Account {
     }
 
     public enum Role {
-        USER, SUPERVISOR, SELLER, ADMIN
+        USER, SUPERVISOR, SELLER, ADMIN, COSMETOLOGIST
+    }
+
+    public enum Subscription {
+        ENABLED, DISABLED, TRIAL, EARLIER, COSMETOLOGIST
     }
 
     @Id
@@ -40,6 +44,9 @@ public class Account {
     private Role role;
     @Enumerated(value = EnumType.STRING)
     private State state;
+
+    @Enumerated(value = EnumType.STRING)
+    private Subscription subscription;
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Product> preferencesProducts = new HashSet<>();
