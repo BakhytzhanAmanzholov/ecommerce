@@ -4,6 +4,7 @@ import kz.hackathon.ecommerce.dto.mappers.AccountMapper;
 import kz.hackathon.ecommerce.dto.mappers.RequestProductMapper;
 import kz.hackathon.ecommerce.dto.mappers.RequestSellerMapper;
 import kz.hackathon.ecommerce.dto.mappers.SurveyMapper;
+import kz.hackathon.ecommerce.dto.request.IdsDto;
 import kz.hackathon.ecommerce.dto.request.RegistrationDto;
 import kz.hackathon.ecommerce.dto.request.RequestProductDto;
 import kz.hackathon.ecommerce.dto.request.RequestSellerDto;
@@ -88,10 +89,12 @@ public class HomeController {
         return ResponseEntity.ok(dtoList);
     }
 
-    @PostMapping("/survey/{id}")
-    public ResponseEntity<?> answerToSurvey(@PathVariable("id") Long id) {
-        Answer answer = answerService.findById(id);
-        productService.addProductsToAccount(answer.getProducts());
+    @PostMapping("/survey")
+    public ResponseEntity<?> answerToSurvey(@RequestBody IdsDto ids) {
+        for (Long id: ids.getIds()){
+            Answer answer = answerService.findById(id);
+            productService.addProductsToAccount(answer.getProducts());
+        }
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
