@@ -1,0 +1,8 @@
+.productsPage .container > h1 + *{
+    position: absolute;
+    top: var(--xxl);
+    left: 20%;
+    z-index: -1;
+
+    translate: -50%;
+}

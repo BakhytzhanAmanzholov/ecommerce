@@ -1,0 +1,40 @@
+
+.consultationCostPage .container{
+    padding: 0;
+
+    height: 100vh;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.consultationCostPage .container > * {
+    height: 100%;
+    padding: var(--md);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--xl);
+}
+
+.consultationCostPage .container > *:nth-of-type(1) {
+    background: var(--register-bg-url) no-repeat center / cover;
+
+    border-right: var(--main-border-width) solid rgba(var(--black-main-color), .1);
+
+    display: flex;
+    place-items: center;
+}
+
+.consultationCostPage .container > *:nth-of-type(2) > * {
+    width: var(--form-width);
+    margin: 0 auto;
+}
+
+.consultationCosts{
+    display: grid;
+    grid-gap: var(--md);
+}

@@ -1,7 +1,37 @@
+.questionSelects {
+    display: grid;
+    grid-gap: var(--sm);
+}
+
+.questionTitle{
+    padding-block: var(--md);
+}
+
+.questionPage{
+    text-align: end;
+}
+
 .question[data-shown='true']{
 
 }
 
 .question[data-shown='false']{
     display: none;
+}
+
+.selection{
+    padding: var(--md) var(--sm);
+    text-align: center;
+
+    cursor: pointer;
+
+    transition: var(--short-transition);
+}
+
+.selection:hover{
+    background-color: rgba(var(--black-main-color), .15);
+}
+
+.selection[data-selected='true']{
+    background-color: rgba(var(--purple-main-color), 1);
 }

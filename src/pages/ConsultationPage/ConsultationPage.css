@@ -1,0 +1,44 @@
+.consultationPage{
+    padding-block: var(--md);
+}
+
+.consultationPage .container{
+
+}
+
+.consultationLeft h3{
+    padding-block: var(--md);
+}
+
+.consultationer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: var(--md);
+}
+
+.consultationRight{
+    flex-grow: 1;
+
+    display: grid;
+    grid-gap: var(--md);
+}
+
+.expertItem{
+    padding: var(--md);
+    
+    cursor: pointer;
+}
+
+.expertItem:hover{
+    background-color: rgba(var(--black-main-color), .15);
+}
+
+.expertItem[data-selected='true']{
+    background-color: rgba(var(--purple-main-color), 1);
+}
+
+.consultationerBtns{
+    display: flex;
+    justify-content: flex-end;
+}

@@ -1,0 +1,8 @@
+.favoritesList{
+    padding-block: var(--md);
+}
+
+.favoritesList h1 a{
+    color: rgba(var(--purple-main-color), 1);
+    display: inline-block;
+}

@@ -87,22 +87,8 @@
     padding-block: var(--md);
 }
 
-.similarProducts .products{
-    display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: var(--md);
-}
-
 /**/
 
 .anotherBuys{
     padding-block: var(--md);
-}
-
-.anotherBuys .products{
-    display: flex;
-    align-items: stretch;
-    justify-content: flex-start;
-    gap: var(--md);
 }
