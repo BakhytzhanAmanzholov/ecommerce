@@ -1,0 +1,12 @@
+.errorPage .container{
+    padding: var(--xxl) 0;
+}
+
+.errorPage .container h1 {
+    text-align: center;
+}
+
+.errorPage a{
+    color: rgba(var(--purple-main-color), 1);
+    display: inline-block;
+}

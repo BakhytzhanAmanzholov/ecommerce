@@ -1,0 +1,12 @@
+.footer{
+    background-color: rgba(var(--purple-main-color), 1);
+
+    padding: var(--md) 0;
+}
+
+.footer .container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: var(--md);
+}

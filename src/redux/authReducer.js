@@ -5,7 +5,10 @@ const initialState = {
         surname: '',
         email: ''
     },
-    token: null
+    token: {
+        accessToken: '',
+        refreshToken: ''
+    }
 }
 
 const SET_CREDENTIALS = 'SET_CREDENTIALS'
@@ -16,7 +19,10 @@ export const authReducer = (state = initialState, action) => {
         case SET_CREDENTIALS:
             return {user: action.payload.user, token: action.payload.token}
         case LOG_OUT:
-            return {user: null, token: null}
+            return {
+                user: { id: null, name: '', surname: '', email: '' },
+                token: { accessToken: '', refreshToken: '' }
+            }
         default:
             return state
     }

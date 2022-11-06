@@ -1,0 +1,29 @@
+.ellipse{
+    background-color: rgba(var(--gray-main-color), 1);
+    border-radius: 100%;
+    aspect-ratio: 1;
+}
+
+.ellipse[data-size='sm']{
+    width: var(--ellipse-sm);
+}
+
+.ellipse[data-size='md']{
+    width: var(--ellipse-md);
+}
+
+.ellipse[data-size='lg']{
+    width: var(--ellipse-lg);
+}
+
+.ellipse[data-size='xl']{
+    width: var(--ellipse-xl);
+}
+
+.ellipse[data-color='purple']{
+    background-color: rgba(var(--purple-main-color), 1);
+}
+
+.ellipse[data-blur='md']{
+    filter: blur(10px);
+}

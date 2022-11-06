@@ -1,14 +1,18 @@
 import './SigninPage.css'
 import {useDispatch, useSelector} from "react-redux";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Form} from "../../UI/Form/Form";
 import {Input} from "../../UI/Input/Input";
 import {Button} from "../../UI/Button/Button";
 import {login} from "../../redux/asyncActions/authAsyncActions";
+import {Ellipse} from "../../UI/Ellipse/Ellipse";
+import {NavLink, useNavigate} from "react-router-dom";
 
 export const SigninPage = () => {
     const dispatch = useDispatch()
     const {user, token} = useSelector(state => state.auth)
+    const {message, status, loading} = useSelector(state => state.api)
+    const navigate = useNavigate()
 
     const [form, setForm] = useState({
         email: '',
@@ -36,13 +40,19 @@ export const SigninPage = () => {
     ]
 
     function handleInputChange(e) {
-        dispatch(setForm({[e.target.name]: e.target.value}))
+        setForm(prevForm => ({...prevForm, [e.target.name]: e.target.value}))
     }
 
-    async function handleFormSubmit(e) {
+    function handleFormSubmit(e) {
         e.preventDefault()
         dispatch(login(form))
     }
+
+    useEffect(() => {
+        if (user?.email){
+            navigate('/')
+        }
+    }, [user?.email])
 
 
     return (
@@ -50,6 +60,7 @@ export const SigninPage = () => {
             <div className="container">
                 <div className="signinLeft">
                     <h1>Login to the site</h1>
+                    {message && <p>{message}</p>}
                     <Form onSubmit={handleFormSubmit}>
                         {
                             inputs?.map(input => (
@@ -59,13 +70,22 @@ export const SigninPage = () => {
                                 />
                             ))
                         }
-                        <Button type={'submit'}>
+                        <div className="additionLinks">
+                            <NavLink to={'/resetPassword'}>Forgot?</NavLink>
+                            <NavLink to={'/registration'}>Register</NavLink>
+                        </div>
+                        <Button
+                            type={'submit'}
+                            disabled={loading}
+                        >
                             Sign In
                         </Button>
                     </Form>
                 </div>
                 <div className="signinRight">
-                    <h1>Right</h1>
+                    <Ellipse
+                        size={'xl'}
+                    />
                 </div>
             </div>
         </div>

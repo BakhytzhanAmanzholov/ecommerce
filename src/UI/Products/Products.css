@@ -1,0 +1,9 @@
+.products{
+    padding-block: var(--md);
+
+    display: grid;
+    align-items: stretch;
+    justify-content: space-between;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: var(--xl);
+}

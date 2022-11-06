@@ -9,6 +9,7 @@ import EsteeLauder from '../../assets/img/homePage/brands/ESTEELAUDER.png'
 import Givenchy from '../../assets/img/homePage/brands/Givenchy.png'
 import Lancome from '../../assets/img/homePage/brands/lancome.png'
 import Zielenski from '../../assets/img/homePage/brands/zielenski.png'
+import {NavLink} from "react-router-dom";
 
 const brands = [
     {
@@ -36,7 +37,9 @@ export const HomePage = () => {
             <section className={'searchBanner'}>
                 <div className="container">
                     <Search/>
-                    <img src={searchGirl} alt="Search Girl"/>
+                    <NavLink to={'/products'}>
+                        <img src={searchGirl} alt="Search Girl"/>
+                    </NavLink>
                 </div>
             </section>
             <section className={'brands'}>

@@ -1,14 +1,19 @@
 import './SignupPage.css'
 import {Form} from "../../UI/Form/Form";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {Input} from "../../UI/Input/Input";
 import {Button} from "../../UI/Button/Button";
+import {NavLink, useNavigate} from "react-router-dom";
+import {Ellipse} from "../../UI/Ellipse/Ellipse";
 import {register} from "../../redux/asyncActions/authAsyncActions";
+import {setInitial} from "../../redux/axiosReducer";
 
 export const SignupPage = () => {
     const dispatch = useDispatch()
     const {user, token} = useSelector(state => state.auth)
+    const {loading, status, message} = useSelector(state => state.api)
+    const navigate = useNavigate()
 
     const [form, setForm] = useState({
         name: '',
@@ -54,22 +59,37 @@ export const SignupPage = () => {
     ]
 
     function handleInputChange(e) {
-        dispatch(setForm({[e.target.name]: e.target.value}))
+        setForm(prevForm => ({...prevForm, [e.target.name]: e.target.value}))
     }
 
-    async function handleFormSubmit(e) {
+    function handleFormSubmit(e) {
         e.preventDefault()
         dispatch(register(form))
     }
+
+    useEffect(() => {
+        if (status === 200 || status === 201){
+            setForm({
+                name: '',
+                surname: '',
+                email: '',
+                password: ''
+            })
+            navigate('/login')
+        }
+    }, [status])
 
     return (
         <div className="signupPage" id="signupPage">
             <div className="container">
                 <div className="signupLeft">
-                    <h1>Left</h1>
+                    <Ellipse
+                        size={'xl'}
+                    />
                 </div>
                 <div className="sighupRight">
                     <h1>Create Account</h1>
+                    {message && <p>{message}</p>}
                     <Form onSubmit={handleFormSubmit}>
                         {
                             inputs?.map(input => (
@@ -79,7 +99,14 @@ export const SignupPage = () => {
                                 />
                             ))
                         }
-                        <Button type={'submit'}>
+                        <div className="additionLinks">
+                            <NavLink to={'/login'}>Already have an account?</NavLink>
+                        </div>
+                        <Button
+                            type={'submit'}
+                            data-color={'purple'}
+                            disabled={loading}
+                        >
                             Sign Up
                         </Button>
                     </Form>
