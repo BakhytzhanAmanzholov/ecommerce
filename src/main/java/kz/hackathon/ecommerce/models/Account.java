@@ -53,4 +53,7 @@ public class Account {
 
     @OneToMany
     private List<InfoProduct> purchasedProducts;
+
+    @OneToMany
+    private List<CosmetologistInfo> cosmetologistInfos;
 }

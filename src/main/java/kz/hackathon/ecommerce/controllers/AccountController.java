@@ -1,14 +1,14 @@
 package kz.hackathon.ecommerce.controllers;
 
 import kz.hackathon.ecommerce.dto.mappers.AccountMapper;
+import kz.hackathon.ecommerce.dto.mappers.CosmetologistMapper;
 import kz.hackathon.ecommerce.dto.request.IdsDto;
 import kz.hackathon.ecommerce.dto.response.AccountDto;
+import kz.hackathon.ecommerce.dto.response.CosmetologistDto;
 import kz.hackathon.ecommerce.models.Account;
 import kz.hackathon.ecommerce.models.PriceInfo;
 import kz.hackathon.ecommerce.models.Product;
-import kz.hackathon.ecommerce.services.AccountService;
-import kz.hackathon.ecommerce.services.PriceInfoService;
-import kz.hackathon.ecommerce.services.ProductService;
+import kz.hackathon.ecommerce.services.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -30,6 +30,10 @@ public class AccountController {
     private final PriceInfoService priceInfoService;
 
     private final AccountService accountService;
+
+    private final CosmetologistTimeService cosmetologistTimeService;
+
+    private final CosmetologistInfoService cosmetologistInfoService;
 
     @GetMapping("/analysis")
     public ResponseEntity<?> analysis() {
@@ -76,6 +80,13 @@ public class AccountController {
             return new ResponseEntity<>(accounts, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @GetMapping("/cosmetologist/{id}")
+    public ResponseEntity<?> findCosmetologist(@PathVariable("id") Long id){
+        Account cosmetologist = accountService.findById(id);
+
+        return ResponseEntity.ok(CosmetologistMapper.toResponseDto(cosmetologist));
     }
 
 }

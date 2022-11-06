@@ -1,9 +1,11 @@
 package kz.hackathon.ecommerce.services.implementation;
 
 import kz.hackathon.ecommerce.models.Account;
+import kz.hackathon.ecommerce.models.CosmetologistInfo;
 import kz.hackathon.ecommerce.models.PriceInfo;
 import kz.hackathon.ecommerce.repositories.AccountRepository;
 import kz.hackathon.ecommerce.services.AccountService;
+import kz.hackathon.ecommerce.services.CosmetologistInfoService;
 import kz.hackathon.ecommerce.services.PriceInfoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,8 @@ public class AccountServiceImpl implements AccountService {
     private final PasswordEncoder passwordEncoder;
 
     private final PriceInfoService priceInfoService;
+
+    private final CosmetologistInfoService cosmetologistInfoService;
 
     @Override
     public Account findByEmail(String email) {
@@ -106,5 +110,12 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<Account> findAllCosmetologist() {
         return accountRepository.findAllByRole(Account.Role.COSMETOLOGIST);
+    }
+
+    @Override
+    public void addInfoToCosmetologist(Account account, CosmetologistInfo cosmetologistInfo) {
+        Account realAccount = findByEmail(account.getEmail());
+        CosmetologistInfo realInfo = cosmetologistInfoService.findById(cosmetologistInfo.getId());
+        realAccount.getCosmetologistInfos().add(realInfo);
     }
 }

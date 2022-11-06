@@ -21,6 +21,7 @@ public class AccountMapper {
                 .role(Account.Role.USER)
                 .subscription(Account.Subscription.DISABLED)
                 .preferencesProducts(new HashSet<>())
+                .cosmetologistInfos(new ArrayList<>())
                 .build();
     }
 

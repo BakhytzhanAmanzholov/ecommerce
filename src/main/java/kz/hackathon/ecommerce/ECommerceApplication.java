@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +38,8 @@ public class ECommerceApplication {
     public CommandLineRunner commandLineRunner(ProductService productService, SurveyService surveyService,
                                                AnswerService answerService, IngredientService ingredientService,
                                                CategoryService categoryService, SubCategoryService subCategoryService,
-                                               AccountService accountService, PriceInfoService priceInfoService) {
+                                               AccountService accountService, PriceInfoService priceInfoService,
+                                               CosmetologistInfoService cosmetologistInfoService, CosmetologistTimeService cosmetologistTimeService) {
         return args -> {
             Ingredient ingredient1 = ingredientService.save(
                 Ingredient.builder()
@@ -494,6 +497,7 @@ public class ECommerceApplication {
                             .email("aidana.cosmetologist@gmail.com")
                             .surname("Malieva")
                             .password("abc123")
+                            .cosmetologistInfos(new ArrayList<>())
                             .build()
             );
 
@@ -508,6 +512,69 @@ public class ECommerceApplication {
                             .build()
             );
 
+            CosmetologistInfo cosmetologistInfo1 = cosmetologistInfoService.save(
+                    CosmetologistInfo.builder()
+                            .cosmetologist(cosmetologist1)
+                            .state(CosmetologistInfo.Sphere.Cosmetologist)
+                            .times(new ArrayList<>())
+                            .price(5000)
+                            .build()
+            );
+
+            CosmetologistInfo cosmetologistInfo2 = cosmetologistInfoService.save(
+                    CosmetologistInfo.builder()
+                            .cosmetologist(cosmetologist1)
+                            .state(CosmetologistInfo.Sphere.Dermatologist)
+                            .times(new ArrayList<>())
+                            .price(15000)
+                            .build()
+            );
+
+            CosmetologistTime cosmetologistTime1 = cosmetologistTimeService.save(
+              CosmetologistTime.builder()
+                      .time(Time.valueOf(LocalTime.now()))
+                      .account(account)
+                      .cosmetologist(cosmetologist1)
+                      .build()
+            );
+
+            CosmetologistTime cosmetologistTime2 = cosmetologistTimeService.save(
+                    CosmetologistTime.builder()
+                            .time(Time.valueOf(LocalTime.now()))
+                            .cosmetologist(cosmetologist1)
+                            .build()
+            );
+
+            CosmetologistTime cosmetologistTime3 = cosmetologistTimeService.save(
+                    CosmetologistTime.builder()
+                            .time(Time.valueOf(LocalTime.now()))
+                            .account(account)
+                            .cosmetologist(cosmetologist1)
+                            .build()
+            );
+
+            CosmetologistTime cosmetologistTime4 = cosmetologistTimeService.save(
+                    CosmetologistTime.builder()
+                            .time(Time.valueOf(LocalTime.now()))
+                            .cosmetologist(cosmetologist1)
+                            .build()
+            );
+
+            CosmetologistTime cosmetologistTime5 = cosmetologistTimeService.save(
+                    CosmetologistTime.builder()
+                            .time(Time.valueOf(LocalTime.now()))
+                            .cosmetologist(cosmetologist1)
+                            .build()
+            );
+
+            cosmetologistInfoService.addTimeToInfo(cosmetologistInfo1, cosmetologistTime1);
+            cosmetologistInfoService.addTimeToInfo(cosmetologistInfo1, cosmetologistTime2);
+            cosmetologistInfoService.addTimeToInfo(cosmetologistInfo1, cosmetologistTime3);
+            cosmetologistInfoService.addTimeToInfo(cosmetologistInfo2, cosmetologistTime4);
+            cosmetologistInfoService.addTimeToInfo(cosmetologistInfo2, cosmetologistTime5);
+
+            accountService.addInfoToCosmetologist(cosmetologist1, cosmetologistInfo1);
+            accountService.addInfoToCosmetologist(cosmetologist1, cosmetologistInfo2);
 
         };
     }
