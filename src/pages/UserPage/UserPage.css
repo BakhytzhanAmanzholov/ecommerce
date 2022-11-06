@@ -1,0 +1,86 @@
+.userPage{
+    padding-block: var(--xl);
+}
+
+.userPage .container{
+    display: grid;
+    grid-gap: var(--xl);
+}
+
+.userPage .container > h1{
+    text-align: center;
+}
+
+.accountData{
+    display: grid;
+    align-items: stretch;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--xl);
+}
+
+.accountData > *{
+    border: var(--main-border-width) solid rgba(var(--black-main-color), 1);
+    border-radius: var(--main-border-radius);
+
+    padding: var(--md);
+}
+
+.accountInfo{
+    display: flex;
+    flex-direction: column;
+    grid-gap: var(--xl);
+}
+
+.accountInfoHead{
+    display: grid;
+    grid-gap: var(--md);
+}
+
+.accountInfoBtns{
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--md);
+}
+
+
+
+/*  */
+
+.siteAdditions{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--md);
+}
+
+.sideAdditionLeft {
+    flex-basis: 33%;
+    padding: var(--md);
+}
+
+.sideAdditionLeft ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    align-items: flex-start;
+    justify-content: flex-start;
+    grid-template-columns: 1fr;
+    grid-gap: var(--md);
+}
+/**/
+.sideAdditionRight{
+    border: var(--main-border-width) solid rgba(var(--black-main-color), 1);
+    border-radius: var(--main-border-radius);
+    padding: var(--md);
+
+    display: grid;
+    align-items: flex-start;
+    justify-content: flex-start;
+    grid-gap: var(--md);
+}

@@ -8,11 +8,10 @@ import {login} from "../../redux/asyncActions/authAsyncActions";
 import {Ellipse} from "../../UI/Ellipse/Ellipse";
 import {NavLink, useNavigate} from "react-router-dom";
 
-// import photo from '../../assets/img/authPages/loginPage.png'
-
 export const SigninPage = () => {
     const dispatch = useDispatch()
     const {user, token} = useSelector(state => state.auth)
+    const {message, status, loading} = useSelector(state => state.api)
     const navigate = useNavigate()
 
     const [form, setForm] = useState({
@@ -50,10 +49,10 @@ export const SigninPage = () => {
     }
 
     useEffect(() => {
-        if (token){
+        if (user?.email){
             navigate('/')
         }
-    }, [])
+    }, [user?.email])
 
 
     return (
@@ -61,6 +60,7 @@ export const SigninPage = () => {
             <div className="container">
                 <div className="signinLeft">
                     <h1>Login to the site</h1>
+                    {message && <p>{message}</p>}
                     <Form onSubmit={handleFormSubmit}>
                         {
                             inputs?.map(input => (
@@ -74,7 +74,10 @@ export const SigninPage = () => {
                             <NavLink to={'/resetPassword'}>Forgot?</NavLink>
                             <NavLink to={'/registration'}>Register</NavLink>
                         </div>
-                        <Button type={'submit'}>
+                        <Button
+                            type={'submit'}
+                            disabled={loading}
+                        >
                             Sign In
                         </Button>
                     </Form>

@@ -6,7 +6,6 @@ import {setData, setInitial, setLoadingFalse, setLoadingTrue} from "../axiosRedu
 
 export const register = payload =>
     dispatch => {
-        console.log(payload)
         dispatch(setLoadingTrue())
         return axios.post('https://hackathon-2022-app.herokuapp.com/api/registration', {
             name: payload.name,
@@ -20,8 +19,14 @@ export const register = payload =>
                     message: res.data.message,
                     loading: false
                 }))
-                console.log(res.data)
-                dispatch(setLoadingFalse())
+                dispatch(setData({
+                    status: res.status,
+                    message: res.data.message,
+                    loading: false
+                }))
+                setTimeout(() => {
+                    dispatch(setInitial())
+                }, 5000)
             })
             .catch(e => {
                 dispatch(setData({status: e.status, message: e.message, loading: false}))
@@ -46,21 +51,22 @@ export const login = payload =>
                     message: res.data.message,
                     loading: false
                 }))
-                console.log(res.data)
-
-                dispatch(setLoadingFalse())
 
                 const data = {
                     user: {
-                        id: res.data.id,
-                        name: res.data.name,
-                        surname: res.data.surname,
-                        email: payload.email,
-                        // password: payload.password,
+                        id: res.data.account.id,
+                        name: res.data.account.name,
+                        surname: res.data.account.surname,
+                        email: payload.email
                     },
-                    token: res.data.token
+                    token: {
+                        accessToken: res.data.token.accessToken,
+                        refreshToken: res.data.token.refreshToken
+                    }
                 }
                 dispatch(setCredentialsAction(data))
+                dispatch(setLoadingFalse())
+                // Promise.resolve(dispatch(setLoadingFalse())).then(dispatch(setCredentialsAction(data)))
             })
             .catch(e => {
                 dispatch(setData({status: e.status, loading: false, message: e.message}))

@@ -1,0 +1,9 @@
+.productSellers{
+    padding-block: var(--md);
+
+    display: grid;
+    align-items: stretch;
+    justify-content: space-between;
+    grid-gap: var(--md);
+    grid-template-columns: repeat(2, 1fr);
+}

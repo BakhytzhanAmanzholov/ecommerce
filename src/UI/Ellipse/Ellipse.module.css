@@ -1,5 +1,5 @@
 .ellipse{
-    background-color: rgba(var(--ellipse-bg-color), 1);
+    background-color: rgba(var(--gray-main-color), 1);
     border-radius: 100%;
     aspect-ratio: 1;
 }
@@ -18,4 +18,12 @@
 
 .ellipse[data-size='xl']{
     width: var(--ellipse-xl);
+}
+
+.ellipse[data-color='purple']{
+    background-color: rgba(var(--purple-main-color), 1);
+}
+
+.ellipse[data-blur='md']{
+    filter: blur(10px);
 }

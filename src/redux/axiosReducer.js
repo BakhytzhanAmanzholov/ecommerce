@@ -9,7 +9,7 @@ const SET_LOADING_FALSE = 'SET_LOADING_FALSE'
 const SET_DATA = 'SET_DATA'
 const SET_INITIAL = 'SET_INITIAL'
 
-export const authReducer = (state = initialState, action) => {
+export const axiosReducer = (state = initialState, action) => {
     switch (action.type) {
         case SET_LOADING_TRUE:
             return {...state, loading: true}

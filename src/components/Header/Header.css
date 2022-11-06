@@ -1,5 +1,5 @@
 .header{
-    padding: var(--md) 0;
+    padding-block: var(--md);
 }
 
 .header .container{
@@ -21,7 +21,7 @@
     gap: var(--md);
 }
 
-.headerAccount a{
+.headerAccount ul.auth a{
     border-radius: var(--max);
 
     padding: var(--sm) var(--xl);

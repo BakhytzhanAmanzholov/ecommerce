@@ -7,10 +7,12 @@ import {Button} from "../../UI/Button/Button";
 import {NavLink, useNavigate} from "react-router-dom";
 import {Ellipse} from "../../UI/Ellipse/Ellipse";
 import {register} from "../../redux/asyncActions/authAsyncActions";
+import {setInitial} from "../../redux/axiosReducer";
 
 export const SignupPage = () => {
     const dispatch = useDispatch()
     const {user, token} = useSelector(state => state.auth)
+    const {loading, status, message} = useSelector(state => state.api)
     const navigate = useNavigate()
 
     const [form, setForm] = useState({
@@ -64,12 +66,18 @@ export const SignupPage = () => {
         e.preventDefault()
         dispatch(register(form))
     }
-    
+
     useEffect(() => {
-        if (token){
-            navigate('/')
+        if (status === 200 || status === 201){
+            setForm({
+                name: '',
+                surname: '',
+                email: '',
+                password: ''
+            })
+            navigate('/login')
         }
-    }, [])
+    }, [status])
 
     return (
         <div className="signupPage" id="signupPage">
@@ -81,6 +89,7 @@ export const SignupPage = () => {
                 </div>
                 <div className="sighupRight">
                     <h1>Create Account</h1>
+                    {message && <p>{message}</p>}
                     <Form onSubmit={handleFormSubmit}>
                         {
                             inputs?.map(input => (
@@ -93,7 +102,11 @@ export const SignupPage = () => {
                         <div className="additionLinks">
                             <NavLink to={'/login'}>Already have an account?</NavLink>
                         </div>
-                        <Button type={'submit'} data-color={'purple'}>
+                        <Button
+                            type={'submit'}
+                            data-color={'purple'}
+                            disabled={loading}
+                        >
                             Sign Up
                         </Button>
                     </Form>

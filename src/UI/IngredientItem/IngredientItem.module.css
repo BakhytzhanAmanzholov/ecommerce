@@ -1,0 +1,12 @@
+.ingredientsItem{
+    padding-block: var(--sm);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--md);
+}
+
+.ingredientsItem img{
+    width: var(--md);
+}

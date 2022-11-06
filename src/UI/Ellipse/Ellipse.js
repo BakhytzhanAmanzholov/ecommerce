@@ -2,10 +2,11 @@ import s from './Ellipse.module.css'
 
 export const Ellipse = ({...props}) => {
     const {
-        size = 'md'
+        size = 'md',
+        ...etc
     } = props
 
     return(
-        <div className={s.ellipse} data-size={size}></div>
+        <div className={s.ellipse} data-size={size} {...etc}/>
     )
 }

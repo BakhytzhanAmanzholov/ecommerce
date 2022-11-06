@@ -1,0 +1,38 @@
+.product{
+    padding: var(--sm);
+
+    box-shadow: var(--secondary-shadow);
+}
+
+.productTop {
+    position: relative;
+
+    padding: var(--md);
+
+    display: grid;
+    place-items: center;
+}
+
+.productTop img[data-favorite]{
+    width: var(--md);
+
+    position: absolute;
+    left: var(--sm);
+    top: var(--sm);
+
+    cursor: pointer;
+}
+
+.productTop > img:nth-of-type(2){
+    width: var(--xxl);
+}
+
+/**/
+
+.productBottom{
+    padding: var(--md);
+
+    text-align: center;
+
+    /*cursor: pointer;*/
+}
