@@ -75,16 +75,26 @@
 }
 /**/
 .sideAdditionRight{
+    flex-grow: 1;
+
     border: var(--main-border-width) solid rgba(var(--black-main-color), 1);
     border-radius: var(--main-border-radius);
     padding: var(--md);
 
     display: grid;
+    grid-template-columns: 1fr;
     align-items: flex-start;
     justify-content: flex-start;
     grid-gap: var(--md);
 }
 
-.sideAdditionRight{
-    
+.sideAdditionRight textarea{
+    width: 100%;
+
+    resize: none;
+}
+
+.partnersBtns{
+    display: grid;
+    justify-content: flex-end;
 }

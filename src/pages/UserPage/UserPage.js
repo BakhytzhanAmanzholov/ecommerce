@@ -56,6 +56,7 @@ export const UserPage = () => {
         })
             .then(res => {
                 console.log(res.data)
+                setMessageToPartners('')
             })
     }
 
@@ -120,7 +121,7 @@ export const UserPage = () => {
                             onChange={handleMessageChange}
                         >
                         </textarea>
-                        <div className="pertnersBtns">
+                        <div className="partnersBtns">
                             <Button
                                 onClick={handlePartnersSubmit}
                             >
