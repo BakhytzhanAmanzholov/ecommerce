@@ -46,6 +46,8 @@ export const login = payload =>
             }
         })
             .then(res => {
+                console.log(res)
+
                 if (res.status !== 200) return dispatch(setData({
                     status: res.status,
                     message: res.data.message,
@@ -66,7 +68,6 @@ export const login = payload =>
                 }
                 dispatch(setCredentialsAction(data))
                 dispatch(setLoadingFalse())
-                // Promise.resolve(dispatch(setLoadingFalse())).then(dispatch(setCredentialsAction(data)))
             })
             .catch(e => {
                 dispatch(setData({status: e.status, loading: false, message: e.message}))

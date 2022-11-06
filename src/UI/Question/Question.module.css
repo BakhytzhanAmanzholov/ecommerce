@@ -1,0 +1,7 @@
+.question[data-shown='true']{
+
+}
+
+.question[data-shown='false']{
+    display: none;
+}

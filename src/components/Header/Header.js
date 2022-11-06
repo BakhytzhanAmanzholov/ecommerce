@@ -9,7 +9,6 @@ import cart from '../../assets/icons/icon_cart_.svg'
 export const Header = () => {
     const dispatch = useDispatch()
     const {user, token} = useSelector(state => state.auth)
-    console.log(user)
     
     return(
         <header className="header" id="header">
