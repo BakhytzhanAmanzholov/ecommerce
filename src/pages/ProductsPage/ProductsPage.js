@@ -8,6 +8,7 @@ import {Products} from "../../UI/Products/Products";
 import {SearchFilter} from "../../components/SearchFilter/SearchFilter";
 import {useEffect} from "react";
 import {getProducts} from "../../redux/asyncActions/productsAsyncActions";
+import {useLocalStorage} from "../../components/useLocalStorage/useLocalStorage";
 
 export const ProductsPage = () => {
     const dispatch = useDispatch()
@@ -23,6 +24,7 @@ export const ProductsPage = () => {
             <div className="container">
                 <h1>Products</h1>
                 <Ellipse
+                    size={'lg'}
                     data-color={'purple'}
                     data-blur={'md'}
                 />
@@ -35,6 +37,7 @@ export const ProductsPage = () => {
                                 id={product.id}
                                 title={product.title}
                                 el={product}
+                                product={product}
                             />
                         ))
                     }

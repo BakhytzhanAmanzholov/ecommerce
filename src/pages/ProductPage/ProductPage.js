@@ -3,6 +3,7 @@ import {NavLink, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
+import activeHeart from '../../assets/icons/ActiveHeart.svg'
 import heart from '../../assets/icons/Heart.svg'
 import temp from '../../assets/img/productsPage/1667581665159 1.png'
 import minus from '../../assets/img/productsPage/minus.png'
@@ -15,17 +16,19 @@ import {Product} from "../../UI/Product/Product";
 import axios from "axios";
 import {getProducts} from "../../redux/asyncActions/productsAsyncActions";
 import {setProducts} from "../../redux/productsReducer";
+import {useLocalStorage} from "../../components/useLocalStorage/useLocalStorage";
+import {login} from "../../redux/asyncActions/authAsyncActions";
+import {Products} from "../../UI/Products/Products";
 
 
 export const ProductPage = () => {
     const dispatch = useDispatch()
     const products = useSelector(state => state.products)
 
-
     const {id} = useParams()
     const [product, setProduct] = useState({})
     const [counter, setCounter] = useState(1)
-    // const []
+    const [selectedSeller, setSelectedSeller] = useState(null)
 
     const handlePlusCounter = () => setCounter(prevCounter => prevCounter + 1)
     const handleMinusCounter = () => {
@@ -42,6 +45,35 @@ export const ProductPage = () => {
         }
     }, [products])
 
+    const [cart, setCart] = useLocalStorage('cart', [])
+    const [favorites, setFavorites] = useLocalStorage('favorites', [])
+
+    const handleAddToCart = () => {
+        if (!selectedSeller) {
+            return
+        }
+        if (!cart.find(el => el.id === product.id)) {
+            console.log(product)
+            setCart(prev => [...prev, {...product, number: counter, selectedSeller}])
+        }
+        setSelectedSeller(null)
+        setCounter(1)
+    }
+
+    const handleAddToFavorites = () => {
+        if (!favorites.find(el => el.id === product.id)) {
+            setFavorites(prev => [...prev, product])
+        } else {
+            setFavorites(prev => prev.filter(el => el.id !== product.id))
+        }
+    }
+
+    const handleSelectSeller = (id) => {
+        setSelectedSeller(id)
+    }
+
+    const isFavorite = !!favorites.find(el => el.id === +id)
+
     return (
         <div className={'productPage'}>
             <div className="container">
@@ -53,7 +85,6 @@ export const ProductPage = () => {
                         <h1>{product?.title}</h1>
                         <h1><a href={'#productsIngredients'}>Specifications</a></h1>
                         <h1>{product?.subCategory}</h1>
-                        <h1>{'35 000'}</h1>
                         <div className="productBuyCounter">
                             <div className="minusCounter">
                                 <img src={minus} alt="Minus product" onClick={handleMinusCounter}/>
@@ -66,10 +97,22 @@ export const ProductPage = () => {
                             </div>
                         </div>
                         <div className="productBtns">
-                            <Button>Add to cart</Button>
                             <Button
-                                // data-outline={true}
-                            ><img src={heart} alt="Favorite"/></Button>
+                                onClick={handleAddToCart}
+                            >
+                                {!!selectedSeller ? 'Add to cart' : 'Select seller'}
+                            </Button>
+                            <Button
+                                onClick={handleAddToFavorites}
+                            >
+                                {
+                                    isFavorite ?
+                                        <img src={activeHeart} alt="Favorite" data-favorite={isFavorite}
+                                             onClick={handleAddToFavorites}/> :
+                                        <img src={heart} alt="Favorite" data-favorite={isFavorite}
+                                             onClick={handleAddToFavorites}/>
+                                }
+                            </Button>
                         </div>
                     </div>
                 </div>
@@ -106,31 +149,50 @@ export const ProductPage = () => {
                     <h1>Sellers</h1>
                     <Sellers>
                         {
-                            [1, 2, 3, 4, 5].map(seller => (
-                                <Seller key={seller}/>
+                            product?.prices?.map(seller => (
+                                <Seller
+                                    key={seller.id}
+                                    id={seller.id}
+                                    seller={seller.seller}
+                                    price={seller.price}
+                                    delivery={seller.delivery}
+                                    onClick={() => handleSelectSeller(seller.id)}
+                                />
                             ))
                         }
                     </Sellers>
                 </div>
                 <div className="similarProducts">
                     <h1>Similar products</h1>
-                    <div className="products">
+                    <Products>
                         {
-                            [1, 2, 3, 4].map(el => (
-                                <Product/>
+                            products.slice(0, 4).map(product => (
+                                <Product
+                                    key={product.id}
+                                    id={product.id}
+                                    title={product.title}
+                                    el={product}
+                                    product={product}
+                                />
                             ))
                         }
-                    </div>
+                    </Products>
                 </div>
                 <div className="anotherBuys">
                     <h1>Another Customers Buy</h1>
-                    <div className="products">
+                    <Products>
                         {
-                            [1, 2, 3, 4].map(el => (
-                                <Product/>
+                            products.slice(4, 8).map(product => (
+                                <Product
+                                    key={product.id}
+                                    id={product.id}
+                                    title={product.title}
+                                    el={product}
+                                    product={product}
+                                />
                             ))
                         }
-                    </div>
+                    </Products>
                 </div>
             </div>
         </div>

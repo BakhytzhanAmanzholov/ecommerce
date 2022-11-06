@@ -1,0 +1,19 @@
+.cartBtns{
+    display: grid;
+    justify-content: flex-end;
+
+    padding-block: var(--md);
+}
+
+.cartList > * > *{
+    cursor: pointer;
+}
+
+.cartList{
+    padding-block: var(--md);
+}
+
+.cartList h1 a{
+    color: rgba(var(--purple-main-color), 1);
+    display: inline-block;
+}

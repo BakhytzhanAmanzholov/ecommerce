@@ -10,6 +10,10 @@
     gap: var(--md);
 }
 
+.headerBrand img{
+    width: calc(1.5 * var(--xl));
+}
+
 .headerAccount ul{
     list-style: none;
     margin: 0;

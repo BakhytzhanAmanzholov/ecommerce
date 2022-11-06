@@ -1,0 +1,21 @@
+.consultantInfo{
+    padding-block: var(--md);
+}
+
+.consultantSpheres{
+    padding-block: var(--md);
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: var(--xl);
+}
+
+.consultantSphere{
+    display: grid;
+    grid-gap: var(--md);
+}
+
+.consultantTime{
+    display: flex;
+    gap: var(--xl);
+}

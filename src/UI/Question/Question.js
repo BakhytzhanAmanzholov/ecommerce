@@ -1,25 +1,42 @@
 import s from './Question.module.css'
+import {Input} from "../Input/Input";
+import axios from "axios";
 
 export const Question = ({...props}) => {
     const {
+        id,
         question = 'Question',
         answers = [],
         pagesNumber = 1,
         currentPage = 1,
+        setUserAnswers,
         ...etc
     } = props
 
+    const handleSelect = (e, questionId, id) => {
+        setUserAnswers(prev => ({...prev, [questionId]: id}))
+    }
+
     return(
-        <div className={s.question} {...etc}>
+        <div className={s.question} {...etc} key={id}>
             <h1 className={s.questionTitle}>
                 {question}
             </h1>
             <p className={s.questionPage}>{currentPage} / {pagesNumber}</p>
-            <div className="questionSelects">
+            <div className={s.questionSelects}>
                 {
-                    answers?.map(el => (
-                        <div key={el.id} className={s.selection}>
-                            {el.answer}
+                    answers?.map((el, i) => (
+                        <div
+                            key={el.id}
+                        >
+                            <input
+                                id={el.id}
+                                type={'radio'}
+                                className={s.selection}
+                                onChange={e => handleSelect(e, id, el.id)}
+                                name={answers + id}
+                            />
+                            <label htmlFor={el.id}>{el?.answer}</label>
                         </div>
                     ))
                 }
@@ -27,3 +44,7 @@ export const Question = ({...props}) => {
         </div>
     )
 }
+
+
+{/*{el.answer}*/}
+{/*</Input>*/}

@@ -29,6 +29,12 @@
 
 /**/
 
+.productNumber{
+    text-align: center;
+}
+
+/**/
+
 .productBottom{
     padding: var(--md);
 

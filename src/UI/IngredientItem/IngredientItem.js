@@ -2,6 +2,9 @@ import s from './IngredientItem.module.css'
 
 import heart from "../../assets/icons/Heart.svg";
 
+import healthyIcon from '../../assets/icons/healthy.svg'
+import unhealthyIcon from '../../assets/icons/unhealthy.svg'
+
 export const IngredientItem = ({...props}) => {
     const {
         id,
@@ -12,7 +15,11 @@ export const IngredientItem = ({...props}) => {
     return(
         <div className={s.ingredientsItem}>
             <p>{name}</p>
-            <img src={heart} alt="Ingredient"/>
+            {
+                healthy ?
+                    <img src={healthyIcon} alt="Ingredient"/> :
+                    <img src={unhealthyIcon} alt="Ingredient"/>
+            }
         </div>
     )
 }

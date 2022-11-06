@@ -1,23 +1,28 @@
 import s from './Seller.module.css'
 import {Button} from "../Button/Button";
 
-export const Seller = () => {
-    const sellerName = 'name'
-    const cost = 1231
+export const Seller = ({...props}) => {
+    const {
+        id,
+        seller = 'Seller',
+        price = 0,
+        delivery,
+        ...etc
+    } = props
 
-    const city = 'Atyrau'
-const date = '9 November'
     return(
-        <div className={s.seller}>
+        <div className={s.seller} {...etc}>
             <div className={s.sellerLeft}>
-                <h3>{sellerName}</h3>
-                <p>otzivy</p>
-                <p>{cost}</p>
+                <h3>{seller.name}</h3>
+                {/*<p>otzivy</p>*/}
+                <p>{price}</p>
             </div>
             <div className={s.sellerRight}>
-                <p>{city}</p>
-                <p>{date}</p>
-                <Button>
+                {/*<p>{city}</p>*/}
+                <p>{delivery}</p>
+                <Button
+                    data-outline={true}
+                >
                     Select
                 </Button>
             </div>
