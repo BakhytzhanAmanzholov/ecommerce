@@ -43,9 +43,16 @@ public class CosmetologistMapper {
                 .id(time.getId())
                 .time(String.valueOf(time.getTime()))
                 .build();
-        if (dto.getAccount() != null) {
-            dto.setAccount(AccountMapper.toResponseDto(time.getAccount()));
-        }
+       try {
+           dto.setAccount(AccountMapper.toResponseDto(time.getAccount()));
+       }
+       catch (NullPointerException e){
+           dto.setAccount(null);
+       }
+
+//        if (dto.getAccount() != null) {
+//            dto.setAccount(AccountMapper.toResponseDto(time.getAccount()));
+//        }
         return dto;
     }
 }

@@ -566,6 +566,8 @@ public class ECommerceApplication {
                             .cosmetologist(cosmetologist1)
                             .build()
             );
+            accountService.addInfoToCosmetologist(cosmetologist1, cosmetologistInfo1);
+            accountService.addInfoToCosmetologist(cosmetologist1, cosmetologistInfo2);
 
             cosmetologistInfoService.addTimeToInfo(cosmetologistInfo1, cosmetologistTime1);
             cosmetologistInfoService.addTimeToInfo(cosmetologistInfo1, cosmetologistTime2);
@@ -573,8 +575,7 @@ public class ECommerceApplication {
             cosmetologistInfoService.addTimeToInfo(cosmetologistInfo2, cosmetologistTime4);
             cosmetologistInfoService.addTimeToInfo(cosmetologistInfo2, cosmetologistTime5);
 
-            accountService.addInfoToCosmetologist(cosmetologist1, cosmetologistInfo1);
-            accountService.addInfoToCosmetologist(cosmetologist1, cosmetologistInfo2);
+
 
         };
     }

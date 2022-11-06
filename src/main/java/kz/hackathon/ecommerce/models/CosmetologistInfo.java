@@ -23,6 +23,7 @@ public class CosmetologistInfo {
     @Enumerated(value = EnumType.STRING)
     private Sphere state;
     @ManyToOne
+    @ToString.Exclude
     private Account cosmetologist;
     private Integer price;
     @OneToMany

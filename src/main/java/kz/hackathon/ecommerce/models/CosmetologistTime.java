@@ -17,8 +17,10 @@ public class CosmetologistTime {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @ToString.Exclude
     private Account cosmetologist;
     @ManyToOne
+    @ToString.Exclude
     private Account account;
     private Time time;
 }

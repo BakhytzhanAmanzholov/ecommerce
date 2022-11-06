@@ -45,6 +45,7 @@ public class CosmetologistInfoServiceImpl implements CosmetologistInfoService {
     public void addTimeToInfo(CosmetologistInfo cosmetologistInfo, CosmetologistTime time) {
         CosmetologistInfo realInfo = findById(cosmetologistInfo.getId());
         CosmetologistTime realTime = cosmetologistTimeService.findById(time.getId());
+
         realInfo.getTimes().add(realTime);
     }
 }
